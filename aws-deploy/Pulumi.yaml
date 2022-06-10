@@ -1,0 +1,4 @@
+name: ec2-dev
+runtime:
+  name: python
+description: Deploy EC2 Instance

@@ -1,0 +1,72 @@
+config:
+  # AWS region to use.
+  aws:region: eu-west-1
+
+  # Test Manager application configuration
+  ec2-dev:application:
+    # Specify the environmental variable that will contain a github token
+    # Defaults to EC2_GITHUB_TOKEN
+    # github-token-env: EC2_GITHUB_TOKEN
+
+    # Specify the environmental variable that will contain source cidr
+    # Defaults to EC2_SOURCE_CDIR
+    # source-cdir-env: EC2_SOURCE_CDIR
+
+    # Option to specify an alternative cloud init script
+    # user-data-file: ./server_user_data.sh
+
+  # Networking configuration
+  ec2-dev:networking:
+    # Use existing vpc
+    # vpc-id: vpc-...
+
+    # private-subnet-id: subnet-...
+    # public-subnet-id: subnet-...
+
+    # or create a vpc with following information
+    vpc-cidr: 192.168.0.0/16
+    private-subnet-cidr: 192.168.1.0/24
+    public-subnet-cidr: 192.168.0.0/24
+
+    # Specify the AZ to use, defaults to 'a'
+    # az: a
+
+    # Specify the region, defaults to AWS_REGION environmental variable
+    # region: eu-west-1
+
+  # IAM role and policy configuration
+  ec2-dev:role:
+    # Specify the name of a role to be used by the EC2 instance
+    # iam-role-name: ec2-dev
+
+    # Alternatively, specify the policies to be assigned to a new role for used by the EC2 instance
+    policies:
+      - arn:aws:iam::aws:policy/AmazonEC2FullAccess
+      - arn:aws:iam::aws:policy/AmazonS3FullAccess
+      - arn:aws:iam::aws:policy/AmazonVPCFullAccess
+      - arn:aws:iam::aws:policy/IAMFullAccess
+      - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+    # Optionally add a permision boundary policy
+    # permissions-boundary: arn:aws:iam:::policy/ec2-dev
+    # s3-vpc-endpoint: <s3 endpoint name>
+  
+  # EC2 instance
+  ec2-dev:server:
+    # Specify the name prefix of the EC2 instance, a random string is added to this name
+    # The name prefix plus random string is used to build names for other resources created.
+    name: ec2-dev
+
+    # Specify instance type and root volume size/type.
+    # instance-type: t2.micro
+    # root-vol-size: 40
+    # root-vol-type: gp2
+
+    # Optionally specify an ssh key to allow ssh access to the instance
+    # ssh-key-name: paul
+
+    # Optionally allow external ssh access, defaults to False
+    # ssh-access: True
+
+    # Specify a specific image to use
+    # ami-id: ami-09bb810700a41173f
+    # ami-account: ...
